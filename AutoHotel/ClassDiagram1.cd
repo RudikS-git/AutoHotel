@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AutoHotel.RoomLodger.Administration">
+    <Position X="8" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAQgAAAAAAAgAAACAAAUAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Models\Administration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="AutoHotel.RoomLodger.Lodger">
+    <Position X="8" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASA=</HashCode>
+      <FileName>Models\Lodger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoHotel.RoomLodger.Room">
+    <Position X="13.25" Y="0.75" Width="1.5" />
+    <Members>
+      <Method Name="OnPropertyChanged" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+      <Property Name="this" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AARCAEAAAgAAQQAAKEAAAACAgAEAEAIAAAFAQAEBAgA=</HashCode>
+      <FileName>Models\Room.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoHotel.Models.People">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAQAACAAAIAQIAAAAEgAAAAAAAACAAAA=</HashCode>
+      <FileName>Models\People.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoHotel.Models.Worker">
+    <Position X="11.25" Y="5" Width="1.5" />
+    <Members>
+      <Method Name="OnPropertyChanged" Hidden="true" />
+      <Event Name="PropertyChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAEIAAAAAAAiAAAAAgAAAAQQAAAEAA=</HashCode>
+      <FileName>Models\Worker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AutoHotel.Interface.ISqlControl">
+    <Position X="11.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interface\ISqlControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

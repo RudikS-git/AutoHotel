@@ -1,0 +1,198 @@
+﻿<UserControl x:Class="AutoHotel.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoHotel"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:converter="clr-namespace:AutoHotel.Converter"
+        mc:Ignorable="d" Height="Auto" Width="Auto">
+
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="BlueLightGradientBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.9" Color="#3986f3"/>
+            <GradientStop Offset="0.1" Color="#2a62b2"/>
+            <GradientStop Offset="0.8" Color="#65a1f6"/>
+        </LinearGradientBrush>
+
+        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+            <Border
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}">
+                <ContentControl Margin="{TemplateBinding Padding}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+        </ControlTemplate>
+
+        <converter:EnumToString x:Key="Conv" />
+        <converter:DateTimeConverter x:Key="ConvDate"/>
+    </UserControl.Resources>
+
+
+    <DockPanel Background="#3986f3" Height="Auto" Width="Auto">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл" >
+                <MenuItem Command="{Binding AboutTheProgram}" Header="О программе"/>
+                <MenuItem Command="{Binding ExitCommand}" Header="Выход"/>
+            </MenuItem>
+        </Menu>
+
+        <WrapPanel DockPanel.Dock="Top" Background="#3986f3" Grid.RowSpan="2" Margin="0,0,0,3" Grid.ColumnSpan="2" Height="37">
+            <Button Visibility="{Binding ButtonVisible}" Background="#3986f3" Template="{StaticResource btTemplate}" Command="{Binding CreateWindowAddRooms}" BorderThickness="0">
+                <Button.ToolTip>
+                    <ToolTip Content="Создание комнаты"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images/addRoom.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" Height="31" />
+            </Button>
+            <Button Visibility="{Binding ButtonVisible}" Background="#3986f3" Template="{StaticResource btTemplate}" BorderThickness="0" Command="{Binding CreateWindowEditRooms}">
+                <Button.ToolTip>
+                    <ToolTip Content="Редактирование комнаты"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images/editRoom.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" Height="31"/>
+            </Button>
+            <Button Visibility="{Binding ButtonVisible}" Background="#3986f3" Template="{StaticResource btTemplate}" BorderThickness="0" Command="{Binding DeleteRoom}" CommandParameter="{Binding SelectedRoom}" Height="34" VerticalAlignment="Bottom" Width="42">
+                <Button.ToolTip>
+                    <ToolTip Content="Удаление комнаты"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images\delRoom.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" Height="31">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="-0.227"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-0.079"/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
+            <Button Background="#3986f3"  Template="{StaticResource btTemplate}" BorderThickness="0" Command="{Binding CreateWindowAddLodgers}" Height="34" VerticalAlignment="Bottom" Width="37">
+                <Button.ToolTip>
+                    <ToolTip Content="Добавление постояльца"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images\addLodgers.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Height="28" Width="33" RenderTransformOrigin="0.495,0.147"/>
+            </Button>
+            <Button Background="#3986f3" Template="{StaticResource btTemplate}" BorderThickness="0" Command="{Binding CreateWindowEditLodgers}">
+                <Button.ToolTip>
+                    <ToolTip Content="Редактирование информации о постояльце"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images/editLodgers.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" Height="31"/>
+            </Button>
+            <Button Command="{Binding DeleteLodger}" Template="{StaticResource btTemplate}" CommandParameter="{Binding SelectedAdmin}" Background="#3986f3" BorderThickness="0">
+                <Button.ToolTip>
+                    <ToolTip Content="Удаление постояльца"/>
+                </Button.ToolTip>
+                <Image Source="/AutoHotel;component/Images\delLodgersNew.jpg" VerticalAlignment="Center" HorizontalAlignment="Center" Width="37" Height="31"/>
+            </Button>
+        </WrapPanel>
+
+        <DockPanel DockPanel.Dock="Top">
+
+            <WrapPanel Background="#3986f3" DockPanel.Dock="Left" Height="24" Width="970" RenderTransformOrigin="0.497,0.528" >
+                <Button Command="{Binding AdvFiltre}" CommandParameter="{Binding Text, ElementName=Search, Mode=TwoWay}" Margin="5, 0, 5, 5" FontWeight="Bold" Content="Расширенный фильтр" Height="20"/>
+                <TextBlock FontWeight="Regular" FontSize="13" FontFamily="Impact" Foreground="White" Height="18" Margin="0, 2, 5, 5" FontStretch="UltraExpanded"><Run Text="Только пустые номера:"/></TextBlock>
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Command="{Binding FilterBlankNumber}" Height="21" Margin="0, 4, 20, 5"/>
+            </WrapPanel>
+
+            <WrapPanel DockPanel.Dock="Left">
+                <TextBlock Margin="0, 2, 5, 0" FontWeight="ExtraLight" FontSize="13" FontFamily="Impact" Foreground="White"><Run Text="Фильтр:"/></TextBlock>
+                <ComboBox Background="White" 
+                          Margin="0, 0, 2, 5" 
+                          Width="125" 
+                          Height="20"
+                          SelectedIndex="{Binding FiltreCbIndex}">
+                    <ComboBoxItem Content="Id"/>
+                    <ComboBoxItem Content="Заселение"/>
+                    <ComboBoxItem Content="Выселение"/>
+                    <ComboBoxItem Content="ФИО"/>
+                    <ComboBoxItem Content="Номер телефона"/>
+                    <ComboBoxItem Content="Эл. почта"/>
+                    <ComboBoxItem Content="Взрослых"/>
+                    <ComboBoxItem Content="Детей"/>
+                    <ComboBoxItem Content="Примечание"/>
+                </ComboBox>
+
+
+                <TextBox x:Name="Search" Margin="5, 0, 5, 5" Height="20" Width="87"/>
+
+                <Button Command="{Binding Filtre}" CommandParameter="{Binding Text, ElementName=Search, Mode=TwoWay}" Margin="5, 0, 5, 5" FontWeight="Bold" Content="Фильтровать" Height="20"/>
+            </WrapPanel>
+
+        </DockPanel>
+
+        <Grid DockPanel.Dock="Bottom" Background="{StaticResource BlueLightGradientBrush}" Height="Auto" Width="Auto">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="400*"/>
+                <ColumnDefinition Width="1000*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="0"/>
+                <RowDefinition Height="24*"/>
+                <RowDefinition/>
+
+            </Grid.RowDefinitions>
+
+            <DataGrid
+                ItemsSource="{Binding Rooms}"
+                SelectedItem="{Binding SelectedRoom}"
+                SelectionMode="Single"
+                CanUserSortColumns="False"   
+                CanUserResizeColumns="False"
+                CanUserResizeRows="False"
+                CanUserReorderColumns="False"
+                Background="{StaticResource BlueLightGradientBrush}"   
+                AutoGenerateColumns="False" 
+                IsReadOnly="True"    
+                CanUserAddRows="False" Grid.Row="1"  >
+
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick" Command="{Binding WatchInformation}" CommandParameter="{Binding ElementName=UsersDataGrid, Path=SelectedItem}" />
+                </DataGrid.InputBindings>
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ид" Binding="{Binding Id}" Width="60"/>
+                    <DataGridTextColumn Header="№ комнаты" Binding="{Binding Number}" Width="80"/>
+                    <DataGridTextColumn Header="Тип комнаты" Binding="{Binding TypeRoom, Converter={StaticResource Conv}}" Width="100"/>
+                    <DataGridTextColumn Header="Тип размещения" Binding="{Binding PlaceRoom, Converter={StaticResource Conv}}" Width="110"/>
+                    <DataGridTextColumn Header="Доп. хар-ки" Binding="{Binding FeatureRoom, Converter={StaticResource Conv}}" Visibility="Hidden" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid ItemsSource="{Binding Administrations}"
+                  SelectedItem="{Binding SelectedAdmin}"
+                  SelectionMode="Single"
+                  CanUserSortColumns="False"   
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserReorderColumns="False"
+                  Background="{StaticResource BlueLightGradientBrush}"   
+                  IsReadOnly="True"
+                  Margin="10,0,0,0" 
+                  AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" >
+                <DataGrid.Resources>
+                    <converter:RowToBrushConverter x:Key="RowToBrushConverter"/>
+                </DataGrid.Resources>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="{Binding Converter={StaticResource RowToBrushConverter}}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ид" Binding="{Binding Id}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ид комнаты" Visibility="Hidden" Binding="{Binding IdEmession}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Заселение" Binding="{Binding DateCheck, Converter={StaticResource ConvDate}}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Выселение" Binding="{Binding DateEviction, Converter={StaticResource ConvDate}}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding Name}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding NumberPhone}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Эл.почта" Binding="{Binding Email}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Взрослых" Binding="{Binding NumAdults}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Детей" Binding="{Binding NumChilds}" Width="Auto"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Примечание" Binding="{Binding Remark}" Width="Auto"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </DockPanel>
+</UserControl>

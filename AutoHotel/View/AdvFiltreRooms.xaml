@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="AutoHotel.View.AdvFiltreRooms"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoHotel.View"
+             xmlns:converter="clr-namespace:AutoHotel.Converter"
+             mc:Ignorable="d" Height="117.284" Width="666.893">
+    <UserControl.Resources>
+        <converter:EnumToStringPlaceRoom x:Key="ConvPlaceRoom"/>
+        <converter:EnumToStringFeatureRoom x:Key="ConvFeatureRoom"/>
+        <converter:EnumToStringTypeRoom x:Key="ConvTypeRoom"/>
+        <converter:BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="104*"/>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="43*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="246*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="23*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Visibility="{Binding ElementName=NumRoom, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}" Text="{Binding Number}" MaxLength="5" Grid.Row="2" Grid.Column="1"/>
+
+        <ComboBox Visibility="{Binding ElementName=TypeRoom, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}"
+                  ItemsSource="{Binding Converter={StaticResource ConvTypeRoom}}" Grid.Column="3" Grid.Row="1" 
+                  DisplayMemberPath="Key"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding TypeRoom, Mode=TwoWay}"
+                  Margin="0,20,0,1" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+
+        <ComboBox Visibility="{Binding ElementName=PlaceRoom, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}"
+                  ItemsSource="{Binding Converter={StaticResource ConvPlaceRoom}}" Width="Auto" Grid.Column="7" Margin="0,20,0,1" Grid.Row="1"
+                  DisplayMemberPath="Key"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding PlaceRoom, Mode=TwoWay}"
+                  Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+
+        <ComboBox Visibility="{Binding ElementName=FeatureRoom, Path=IsChecked, Converter={StaticResource BoolVisibilityConverter}}"
+                  ItemsSource="{Binding Converter={StaticResource ConvFeatureRoom}}" Width="Auto" Grid.Column="12" Grid.Row="2"
+                  DisplayMemberPath="Key"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding FeatureRoom, Mode=TwoWay}"
+                  Margin="0,0,1,0"/>
+
+        <CheckBox Name="NumRoom" IsChecked="{Binding CheckedNumber}" FontWeight="ExtraLight" Content="Номер комнаты" Margin="0,1,0,0" Grid.Column="1" Grid.Row="1"/>
+        <CheckBox Name="TypeRoom" IsChecked="{Binding CheckedType}" FontWeight="ExtraLight" Content="Тип комнаты" Margin="0,1,0,0" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <CheckBox Name="PlaceRoom" IsChecked="{Binding CheckedPlace}" FontWeight="ExtraLight" Content="Тип размещения" Margin="0,1,0,0" Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="3"/>
+        <CheckBox Name="FeatureRoom" IsChecked="{Binding CheckedFeature}" FontWeight="ExtraLight" Content="Доп. хар-ки" Margin="0,1,0,0" Grid.Column="12" Grid.Row="1" HorizontalAlignment="Left" Width="247" Grid.ColumnSpan="2"/>
+
+        <Button Command="{Binding Filtre}" FontWeight="Bold" Grid.Column="4" Margin="0,0,0,2" Grid.Row="4">Фильтровать</Button>
+        <Button Command="{Binding Discharge}" FontWeight="Bold" Grid.Column="7" Margin="0,0,0,2" Grid.Row="4">Сброс</Button>
+        <Button Command="{Binding Exit}" FontWeight="Bold" Grid.Column="9" Margin="0,0,0,2" Grid.Row="4">Отменить</Button>
+    </Grid>
+</UserControl>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="AutoHotel.View.WatchInformationRoom"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoHotel.View"
+             xmlns:converter="clr-namespace:AutoHotel.Converter"
+             mc:Ignorable="d" Height="131.552" Width="352.887">
+    <UserControl.Resources>
+        <converter:YONConverterIceBox x:Key="YONConvIceBox" />
+        <converter:YONConverterCond x:Key="YONConvCond" />
+        <converter:YONConverterBalc x:Key="YONConvBalc" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="48*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="373*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontWeight="ExtraLight" Grid.Column="1" Margin="0,0,246,0" Grid.Row="2">Кондиционер</TextBlock>
+        <Image Source="{Binding featureRooom, Converter={StaticResource YONConvIceBox}}" Margin="84,0,226,0" Grid.Column="1" Grid.Row="1"/>
+        <Image Source="{Binding featureRooom, Converter={StaticResource YONConvCond}}" Margin="84,1,226,0" Grid.Column="1" Grid.Row="2"/>
+        <Image Source="{Binding featureRooom, Converter={StaticResource YONConvBalc}}" Margin="45,0,266,0" Grid.Column="1" Grid.Row="3"/>
+        <TextBlock FontWeight="ExtraLight" Grid.Column="1" Margin="0,0,246,0" Grid.Row="1">Холодильник</TextBlock>
+        <TextBlock FontWeight="ExtraLight" Margin="0,0,285,0" Grid.Column="1" Grid.Row="3">Балкон</TextBlock>
+        <TextBlock FontWeight="ExtraLight" Margin="0,1,71,0" Grid.Row="4" Grid.Column="1">Кол-во гостей проживавших, забронированных:</TextBlock>
+        <TextBlock FontWeight="ExtraLight" HorizontalAlignment="Left" Text="{Binding countLodgers}" Grid.Column="1" Margin="254,1,0,0" Grid.Row="4" Width="21"></TextBlock>
+    </Grid>
+</UserControl>

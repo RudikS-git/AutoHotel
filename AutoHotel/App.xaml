@@ -1,0 +1,27 @@
+﻿<Application x:Class="AutoHotel.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:view="clr-namespace:AutoHotel.View"
+             xmlns:viewmodel="clr-namespace:AutoHotel.ViewModel"
+             StartupUri="View/UserIdent.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodel:MainWindowViewModel}">
+            <view:MainWindow HorizontalAlignment="Stretch" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AddRoomsViewModel}">
+            <view:RoomAddWindow HorizontalAlignment="Stretch" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AddLodgersViewModel}">
+            <view:AddLodgersWindow HorizontalAlignment="Stretch" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AboutTheProgramViewModel}">
+            <view:AboutTheProgram HorizontalAlignment="Stretch" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:AdvFiltreRoomsViewModel}">
+            <view:AdvFiltreRooms HorizontalAlignment="Stretch" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:WatchInfoRoomViewModel}">
+            <view:WatchInformationRoom HorizontalAlignment="Stretch" />
+        </DataTemplate>
+    </Application.Resources>
+</Application>
